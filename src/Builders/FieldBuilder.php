@@ -6,7 +6,7 @@ use DateTime;
 use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
 use Grafite\Forms\Traits\HasLivewire;
-use Illuminate\Support\Collection
+use Illuminate\Support\Collection;
 
 class FieldBuilder
 {
