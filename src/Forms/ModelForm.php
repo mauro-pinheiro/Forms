@@ -425,7 +425,12 @@ class ModelForm extends HtmlForm
                     $class = " class=\"{$data['table-class']}\"";
                 }
 
-                $rows .= "<td{$class}>{$item->$field}</td>";
+                if($data['type'] === 'relationship'){
+                    $text = $data['model_options']['label'];
+                    $rows .= "<td{$class}>{$item->$field->implode($text, ', ')}</td>";
+                } else {
+                    $rows .= "<td{$class}>{$item->$field}</td>";
+                }
             }
 
             $rows .= '<td>';
