@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
 use Grafite\Forms\Traits\HasLivewire;
+use Illuminate\Support\Collection;
 
 class FieldBuilder
 {
@@ -422,7 +423,8 @@ class FieldBuilder
         // without specifying the ID tag which we're checking
         // the select values from - we need to set the values
         // to an array of IDs.
-        if (! is_null($value) && (is_object($value) && method_exists($value, 'toArray'))) {
+        // if (! is_null($value) && (is_object($value) && method_exists($value, 'toArray'))) {
+        if (! is_null($value) && ($value instanceof Collection && method_exists($value, 'toArray'))) {
             $parsedValues = [];
             $optionValue = $options['model_options']['value'];
 
