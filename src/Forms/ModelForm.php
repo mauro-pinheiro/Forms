@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Routing\UrlGenerator;
 use Grafite\Forms\Services\FormMaker;
 use Grafite\Forms\Builders\FieldBuilder;
+use Illuminate\Support\Collection;
 
 class ModelForm extends HtmlForm
 {
@@ -427,7 +428,12 @@ class ModelForm extends HtmlForm
 
                 if($data['type'] === 'relationship'){
                     $text = $data['model_options']['label'];
-                    $rows .= "<td{$class}>{$item->$field->implode($text, ', ')}</td>";
+                    if($item->$field instanceof Collection){
+                        $rows .= "<td{$class}>{$item->$field->implode($text, ', ')}</td>";
+                    } else {
+                        $rows .= "<td{$class}>{$item->$field->$text}</td>";
+                    }
+
                 } else {
                     $rows .= "<td{$class}>{$item->$field}</td>";
                 }
